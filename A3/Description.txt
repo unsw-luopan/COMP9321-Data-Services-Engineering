@@ -1,0 +1,48 @@
+This is the description of the requirements part 2 and 3:
+
+
+For the feature ranking part
+Requirements: numpy 1.16.2
+	      sklearn 0.20.3
+	      numpy 1.16.2
+	      pandas 0.24.2
+	      maplotlib 3.0.3
+  I use RandomForest classifier in the feature ranking. RandomForset is a model to do classification or regression. 
+The sklearn library calculate the Gini Index from root node to children nodes and then do some normalization to do the 
+ranking of feature.
+  To run FeatureImp.py, just simply type "python FeatureImp.py", this document will return a feature ranking index and 
+weight for the "processed.cleveland.data". And generate a map for data visulization of the result called 
+"Feature_importance.jpg".
+
+
+For the neural network part
+Requirements: tensorflow 1.13.1 
+	      pandas  0.24.2
+	      numpy   1.16.2
+  I use Logistic Regression model to do the classification in this assignment. Because the prediction is a binary 
+classification and the data is not too much, so I think the logistic regression will perform well. I use tensorflow
+to build the neural network. 
+  In "Logistic_Regression.py", first I do data cleaning to replace the "?" values. I have tried min-max data 
+normalization for the whole dataset except "target" column to reduce the influence of outliers, but the performance of 
+data sclaing is not good, so I remove it. After that, I use the result returned 
+by FeatureImp.py as the features for training, and their corresponding labels as labels. By the way, the labels are 
+treated as binary(if the values are not equal to 0, make it be 1). 
+  Then the input(features,labels) for the neural network has been done. I establish a two hidden layers neural network.
+I use Relu as the activation function in the first hidden layer to avoid gradient vanishing. Then I use sigmoid function
+as the activation function in the second hidden layer to map the R domain to 0-1 domain. In the first hidder layer, I 
+use drop out method to avoid overfitting.
+  I also use tensorboard for the data visulazation in the neural network. To see the whole graph and the trend of 
+accuracy and loss, you can type "tensorboard --logdir=path/to/log-directory". During adjusting the hyper parameters,
+tensorboard is a good tool to do early stop for avoiding overfitting.
+  Before training, I split the dateset named "processed.cleveland.data" to two parts. One is for training, the other 
+is for cross validation to test the accuracy.
+  To run the trainging, type "python Logistic_Regression.py", this will save the trainging model to "checkpoint" floder.
+I already have the model in the zip document, so you do not have to train again. You can just type 
+"python Logistic_Regression test" for your testing. Testing will be based on "processed.cleveland.data" dataset, so if
+you make sure the name of the dataset is right, just run it.
+  By the way, the Logistic_Regression.py has "eval" part for cross validation during the adjustment of hyper parameter.
+And "testInput" part for testing the input data which the user inputs from the website.
+
+
+  Overall, you can just type "python Logistic_Regression test" to test the accuracy based on the 
+"processed.cleveland.data".  
